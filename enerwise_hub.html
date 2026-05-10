@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="EnerWise Hub – Empowering Sustainable Energy Management and Smart Education across Africa."/>
+  <title>EnerWise Hub – Sustainable Energy & Smart Education</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Reset & Variables ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-deep:   #0A5C2E;
+      --green-mid:    #147A3E;
+      --green-bright: #22A55A;
+      --green-light:  #D6F0E0;
+      --navy:         #0D2B5C;
+      --navy-light:   #1A3C75;
+      --gold:         #F0A500;
+      --gold-light:   #FFD166;
+      --white:        #FFFFFF;
+      --off-white:    #F5FAF7;
+      --text-dark:    #0D1F14;
+      --text-mid:     #3A4F40;
+      --text-light:   #6B8070;
+      --border:       #D4E8DB;
+      --shadow:       0 4px 24px rgba(10,92,46,.12);
+      --shadow-lg:    0 12px 48px rgba(10,92,46,.18);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      color: var(--text-dark);
+      background: var(--white);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    h1,h2,h3,h4 { font-family: 'Syne', sans-serif; line-height: 1.15; }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Buttons ───────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600; font-size: 15px;
+      cursor: pointer; border: none;
+      transition: all .25s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--text-dark);
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(240,165,0,.35); }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,.55);
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.1); transform: translateY(-2px); }
+    .btn-green {
+      background: var(--green-deep);
+      color: var(--white);
+    }
+    .btn-green:hover { background: var(--green-mid); transform: translateY(-2px); box-shadow: var(--shadow); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--green-deep);
+      border: 2px solid var(--green-deep);
+    }
+    .btn-ghost:hover { background: var(--green-deep); color: var(--white); transform: translateY(-2px); }
+
+    /* ── Navbar ────────────────────────────────────────────── */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      padding: 20px 0;
+      transition: all .3s ease;
+    }
+    #navbar.scrolled {
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(12px);
+      padding: 14px 0;
+      box-shadow: 0 2px 20px rgba(10,92,46,.10);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo-mark {
+      width: 38px; height: 38px;
+      background: var(--green-deep);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .nav-logo-mark svg { width: 22px; height: 22px; }
+    .nav-logo-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 18px;
+      color: var(--white);
+      transition: color .3s;
+    }
+    #navbar.scrolled .nav-logo-text { color: var(--green-deep); }
+    .nav-logo-text span { color: var(--gold); }
+    .nav-links {
+      display: flex; align-items: center; gap: 36px;
+    }
+    .nav-links a {
+      font-size: 14px; font-weight: 500;
+      color: rgba(255,255,255,.85);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    #navbar.scrolled .nav-links a { color: var(--text-mid); }
+    #navbar.scrolled .nav-links a:hover { color: var(--green-deep); }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--text-dark) !important;
+      padding: 9px 22px;
+      border-radius: 50px;
+      font-weight: 600 !important;
+    }
+    .nav-cta:hover { background: var(--gold-light) !important; }
+    .nav-toggle {
+      display: none;
+      flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px;
+    }
+    .nav-toggle span {
+      display: block; width: 24px; height: 2px;
+      background: var(--white);
+      border-radius: 2px; transition: all .3s;
+    }
+    #navbar.scrolled .nav-toggle span { background: var(--text-dark); }
+    .mobile-menu {
+      display: none;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--green-deep);
+      z-index: 998; flex-direction: column;
+      align-items: center; justify-content: center; gap: 32px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Syne', sans-serif;
+      font-size: 26px; font-weight: 700;
+      color: var(--white);
+    }
+    .mobile-close {
+      position: absolute; top: 24px; right: 24px;
+      background: none; border: none;
+      color: var(--white); font-size: 28px; cursor: pointer;
+    }
+
+    /* ── Hero ──────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #062918 0%, var(--green-deep) 45%, var(--navy) 100%);
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      padding: 120px 0 80px;
+    }
+    .hero-bg-pattern {
+      position: absolute; inset: 0; opacity: .06;
+      background-image: radial-gradient(circle at 2px 2px, #fff 1px, transparent 0);
+      background-size: 40px 40px;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(240,165,0,.18) 0%, transparent 70%);
+      top: -100px; right: -100px;
+      pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(34,165,90,.22) 0%, transparent 70%);
+      bottom: -50px; left: 10%;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 700px;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(240,165,0,.15);
+      border: 1px solid rgba(240,165,0,.35);
+      color: var(--gold-light);
+      padding: 7px 16px; border-radius: 50px;
+      font-size: 13px; font-weight: 500;
+      margin-bottom: 28px;
+      animation: fadeUp .8s ease both;
+    }
+    .hero-badge-dot {
+      width: 7px; height: 7px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .5; transform: scale(1.5); }
+    }
+    .hero-title {
+      font-size: clamp(40px, 6vw, 68px);
+      color: var(--white);
+      font-weight: 800; margin-bottom: 24px;
+      animation: fadeUp .8s .15s ease both;
+    }
+    .hero-title span { color: var(--gold); }
+    .hero-tagline {
+      font-size: clamp(16px, 2vw, 20px);
+      color: rgba(255,255,255,.72);
+      margin-bottom: 40px; max-width: 560px;
+      font-weight: 400;
+      animation: fadeUp .8s .3s ease both;
+    }
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 14px;
+      animation: fadeUp .8s .45s ease both;
+    }
+    .hero-stats {
+      display: flex; flex-wrap: wrap; gap: 40px;
+      margin-top: 64px;
+      animation: fadeUp .8s .6s ease both;
+    }
+    .hero-stat-item { }
+    .hero-stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 32px; font-weight: 800;
+      color: var(--white);
+    }
+    .hero-stat-num span { color: var(--gold); }
+    .hero-stat-label {
+      font-size: 13px; color: rgba(255,255,255,.55);
+      margin-top: 2px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Wave divider ──────────────────────────────────────── */
+    .wave-divider { display: block; line-height: 0; }
+    .wave-divider svg { display: block; width: 100%; }
+
+    /* ── Section base ──────────────────────────────────────── */
+    section { padding: 96px 0; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      margin-bottom: 14px;
+    }
+    .section-label::before {
+      content: ''; display: block;
+      width: 28px; height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800; margin-bottom: 16px;
+      color: var(--text-dark);
+    }
+    .section-title span { color: var(--green-deep); }
+    .section-desc {
+      font-size: 17px; color: var(--text-mid);
+      max-width: 560px; line-height: 1.7;
+    }
+    .text-center { text-align: center; }
+    .text-center .section-label { justify-content: center; }
+    .text-center .section-desc { margin: 0 auto; }
+
+    /* ── Partners strip ────────────────────────────────────── */
+    #partners {
+      padding: 32px 0;
+      background: var(--off-white);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .partners-label {
+      text-align: center;
+      font-size: 13px; color: var(--text-light);
+      font-weight: 500; letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .marquee-wrap { overflow: hidden; }
+    .marquee-track {
+      display: flex; gap: 60px; align-items: center;
+      animation: marquee 22s linear infinite;
+      width: max-content;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .partner-chip {
+      display: flex; align-items: center; gap: 10px;
+      white-space: nowrap;
+      font-family: 'Syne', sans-serif;
+      font-size: 14px; font-weight: 700;
+      color: var(--text-light);
+      padding: 8px 20px;
+      border: 1.5px solid var(--border);
+      border-radius: 50px;
+      background: var(--white);
+      opacity: .7;
+    }
+    .partner-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green-bright); }
+
+    /* ── About ─────────────────────────────────────────────── */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-card-main {
+      background: linear-gradient(140deg, var(--green-deep), var(--navy));
+      border-radius: 24px;
+      padding: 48px 40px;
+      color: var(--white);
+      position: relative; overflow: hidden;
+    }
+    .about-card-main::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(240,165,0,.25) 0%, transparent 70%);
+    }
+    .about-card-main h3 {
+      font-size: 24px; margin-bottom: 16px;
+    }
+    .about-card-main p {
+      font-size: 15px; opacity: .8; line-height: 1.7;
+    }
+    .about-card-float {
+      position: absolute; bottom: -24px; right: -24px;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 20px 24px;
+      box-shadow: var(--shadow-lg);
+      display: flex; align-items: center; gap: 14px;
+    }
+    .about-float-icon {
+      width: 46px; height: 46px;
+      background: var(--green-light);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .about-float-label { font-size: 13px; color: var(--text-light); }
+    .about-float-value {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px; font-weight: 800;
+      color: var(--text-dark);
+    }
+    .about-content { }
+    .about-text { font-size: 16px; color: var(--text-mid); line-height: 1.8; margin-bottom: 28px; }
+    .about-pillars {
+      display: flex; flex-direction: column; gap: 16px;
+      margin-bottom: 36px;
+    }
+    .pillar-row {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 16px 20px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .pillar-row:hover { border-color: var(--green-bright); box-shadow: 0 4px 16px rgba(10,92,46,.08); }
+    .pillar-icon {
+      font-size: 24px; flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .pillar-row h4 { font-size: 15px; margin-bottom: 4px; }
+    .pillar-row p { font-size: 14px; color: var(--text-light); }
+
+    /* ── Focus Areas ───────────────────────────────────────── */
+    #focus { background: var(--off-white); }
+    .focus-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px; margin-top: 56px;
+    }
+    .focus-card {
+      border-radius: 24px; overflow: hidden;
+      position: relative;
+      min-height: 460px;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 40px;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .focus-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .focus-card-energy {
+      background: linear-gradient(160deg, #062918 0%, var(--green-deep) 60%, #0a7a3a 100%);
+    }
+    .focus-card-education {
+      background: linear-gradient(160deg, #050f2e 0%, var(--navy) 60%, #1a4080 100%);
+    }
+    .focus-card-badge {
+      position: absolute; top: 32px; left: 40px;
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.25);
+      color: rgba(255,255,255,.9);
+      padding: 6px 14px; border-radius: 50px;
+      font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em;
+    }
+    .focus-card-icon {
+      font-size: 48px; margin-bottom: 20px;
+    }
+    .focus-card h3 {
+      font-size: 28px; color: var(--white);
+      margin-bottom: 14px;
+    }
+    .focus-card p {
+      font-size: 15px; color: rgba(255,255,255,.72);
+      line-height: 1.7; margin-bottom: 28px;
+    }
+    .focus-tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 28px;
+    }
+    .focus-tag {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.85);
+      padding: 5px 14px; border-radius: 50px;
+      font-size: 13px;
+    }
+    .focus-bg-deco {
+      position: absolute; top: -20px; right: -20px;
+      font-size: 160px; opacity: .04;
+      pointer-events: none; line-height: 1;
+    }
+
+    /* ── Services ──────────────────────────────────────────── */
+    #services { background: var(--white); }
+    .services-header {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 40px; align-items: end;
+      margin-bottom: 56px;
+    }
+    .services-tabs {
+      display: flex; gap: 10px;
+      align-self: flex-end; flex-wrap: wrap;
+    }
+    .tab-btn {
+      padding: 9px 22px; border-radius: 50px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px; font-weight: 500;
+      cursor: pointer; border: 2px solid var(--border);
+      background: var(--white); color: var(--text-mid);
+      transition: all .2s;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--green-deep); color: var(--white);
+      border-color: var(--green-deep);
+    }
+    .service-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .service-card {
+      padding: 32px 28px;
+      border-radius: 18px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      transition: all .25s ease;
+      position: relative; overflow: hidden;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green-deep), var(--gold));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .3s ease;
+    }
+    .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--green-light); }
+    .service-card:hover::after { transform: scaleX(1); }
+    .service-icon {
+      width: 52px; height: 52px;
+      background: var(--green-light);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 20px;
+    }
+    .service-card h4 { font-size: 17px; margin-bottom: 10px; }
+    .service-card p { font-size: 14px; color: var(--text-light); line-height: 1.7; }
+
+    /* ── Impact Numbers ────────────────────────────────────── */
+    #impact {
+      background: linear-gradient(135deg, var(--green-deep) 0%, var(--navy) 100%);
+      padding: 80px 0;
+    }
+    .impact-inner {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 40px; text-align: center;
+    }
+    .impact-item { }
+    .impact-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 50px; font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+    }
+    .impact-num .suffix { color: var(--gold); }
+    .impact-label {
+      font-size: 14px; color: rgba(255,255,255,.65);
+      margin-top: 8px; line-height: 1.5;
+    }
+    .impact-divider {
+      width: 1px; background: rgba(255,255,255,.1);
+    }
+
+    /* ── Vision ────────────────────────────────────────────── */
+    #vision { background: var(--off-white); }
+    .vision-grid {
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: 80px; align-items: center;
+      margin-top: 56px;
+    }
+    .vision-steps {
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .vision-step {
+      display: flex; gap: 20px;
+      padding-bottom: 36px;
+      position: relative;
+    }
+    .vision-step:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 19px; top: 44px; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--green-bright), var(--border));
+    }
+    .vision-step-num {
+      width: 40px; height: 40px;
+      background: var(--green-deep);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 14px; font-weight: 700;
+      flex-shrink: 0; z-index: 1;
+    }
+    .vision-step-body h4 { font-size: 17px; margin-bottom: 6px; }
+    .vision-step-body p { font-size: 14px; color: var(--text-light); line-height: 1.65; }
+    .vision-graphic {
+      background: linear-gradient(145deg, #f5faf7, #e8f5ee);
+      border-radius: 24px; padding: 48px;
+      border: 1.5px solid var(--border);
+      display: flex; flex-direction: column; gap: 20px;
+    }
+    .vision-quote-mark {
+      font-family: 'Syne', sans-serif;
+      font-size: 72px; line-height: 1;
+      color: var(--green-light);
+      margin-bottom: -16px;
+    }
+    .vision-quote-text {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px; font-weight: 700;
+      color: var(--text-dark); line-height: 1.45;
+    }
+    .vision-quote-sub {
+      font-size: 15px; color: var(--text-light);
+    }
+    .vision-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .vtag {
+      padding: 7px 16px; border-radius: 50px;
+      font-size: 13px; font-weight: 500;
+      background: var(--white); border: 1.5px solid var(--border);
+      color: var(--text-mid);
+    }
+    .vtag.active {
+      background: var(--green-deep); border-color: var(--green-deep);
+      color: var(--white);
+    }
+
+    /* ── CTA Banner ────────────────────────────────────────── */
+    #cta {
+      background: linear-gradient(135deg, #F0A500 0%, #FFD166 100%);
+      padding: 80px 0;
+    }
+    .cta-inner {
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 40px; align-items: center;
+    }
+    .cta-inner h2 {
+      font-size: clamp(26px, 3.5vw, 40px);
+      color: var(--text-dark); margin-bottom: 10px;
+    }
+    .cta-inner p { font-size: 16px; color: rgba(0,0,0,.6); }
+    .cta-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+
+    /* ── Contact ───────────────────────────────────────────── */
+    #contact { background: var(--white); }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; margin-top: 56px;
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 28px; }
+    .contact-item {
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .contact-item-icon {
+      width: 46px; height: 46px;
+      background: var(--green-light);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .contact-item-label { font-size: 12px; color: var(--text-light); font-weight: 500; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+    .contact-item-value { font-size: 15px; font-weight: 500; color: var(--text-dark); }
+    .contact-form { display: flex; flex-direction: column; gap: 18px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-label { font-size: 13px; font-weight: 600; color: var(--text-mid); }
+    .form-input, .form-select, .form-textarea {
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: var(--off-white);
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px; color: var(--text-dark);
+      transition: border-color .2s, box-shadow .2s;
+      outline: none; width: 100%;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--green-mid);
+      box-shadow: 0 0 0 3px rgba(34,165,90,.12);
+    }
+    .form-textarea { resize: vertical; min-height: 120px; }
+
+    /* ── Footer ────────────────────────────────────────────── */
+    #footer {
+      background: var(--text-dark);
+      padding: 72px 0 32px;
+      color: rgba(255,255,255,.65);
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 48px; padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .footer-brand-logo {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 16px;
+    }
+    .footer-logo-mark {
+      width: 36px; height: 36px;
+      background: var(--green-deep);
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .footer-logo-mark svg { width: 20px; height: 20px; }
+    .footer-brand-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 17px; font-weight: 800;
+      color: var(--white);
+    }
+    .footer-brand-name span { color: var(--gold); }
+    .footer-desc { font-size: 14px; line-height: 1.7; margin-bottom: 24px; }
+    .footer-social { display: flex; gap: 12px; }
+    .social-btn {
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      background: rgba(255,255,255,.08);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      transition: background .2s;
+    }
+    .social-btn:hover { background: var(--green-mid); }
+    .footer-col-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 14px; font-weight: 700;
+      color: var(--white); margin-bottom: 20px;
+      text-transform: uppercase; letter-spacing: .07em;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 12px; }
+    .footer-links a {
+      font-size: 14px; color: rgba(255,255,255,.55);
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom {
+      padding-top: 32px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-bottom-copy { font-size: 13px; }
+    .footer-bottom-links { display: flex; gap: 24px; }
+    .footer-bottom-links a { font-size: 13px; color: rgba(255,255,255,.4); transition: color .2s; }
+    .footer-bottom-links a:hover { color: var(--gold); }
+
+    /* ── Scroll reveal ─────────────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+
+    /* ── Back to top ───────────────────────────────────────── */
+    #back-top {
+      position: fixed; bottom: 32px; right: 32px; z-index: 99;
+      width: 44px; height: 44px;
+      background: var(--green-deep);
+      color: var(--white); border: none; cursor: pointer;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      box-shadow: var(--shadow);
+      opacity: 0; transform: translateY(20px);
+      transition: all .3s ease;
+    }
+    #back-top.visible { opacity: 1; transform: translateY(0); }
+    #back-top:hover { background: var(--green-mid); transform: translateY(-2px); }
+
+    /* ── Responsive ────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .about-grid, .focus-cards, .vision-grid,
+      .contact-grid, .cta-inner { grid-template-columns: 1fr; gap: 40px; }
+      .services-header { grid-template-columns: 1fr; gap: 20px; }
+      .services-tabs { align-self: auto; }
+      .service-grid { grid-template-columns: repeat(2,1fr); }
+      .impact-inner { grid-template-columns: repeat(2,1fr); gap: 28px; }
+      .impact-divider { display: none; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .about-card-float { position: static; margin-top: 20px; width: fit-content; }
+      .about-visual { padding-bottom: 0; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 64px 0; }
+      .service-grid { grid-template-columns: 1fr; }
+      .impact-inner { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .hero-stats { gap: 24px; }
+      .focus-card { min-height: 380px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ══ NAVBAR ════════════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a href="#hero" class="nav-logo">
+      <div class="nav-logo-mark">
+        <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 2L13.5 7H18.5L14.5 10.5L16 16L11 13L6 16L7.5 10.5L3.5 7H8.5L11 2Z" fill="#F0A500"/>
+          <path d="M11 8v8M8 11h6" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="nav-logo-text">EnerWise <span>Hub</span></span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#focus">Focus Areas</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#vision">Vision</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact" class="nav-cta">Get Started</a></li>
+    </ul>
+
+    <button class="nav-toggle" id="menuToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="menuClose" aria-label="Close">✕</button>
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#focus" class="mobile-link">Focus Areas</a>
+  <a href="#services" class="mobile-link">Services</a>
+  <a href="#vision" class="mobile-link">Vision</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+  <a href="#contact" class="btn btn-primary">Get Started</a>
+</div>
+
+
+<!-- ══ HERO ══════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Sustainable Energy &amp; Smart Education
+      </div>
+      <h1 class="hero-title">
+        Powering Africa's<br/>
+        <span>Intelligent Future</span>
+      </h1>
+      <p class="hero-tagline">
+        EnerWise Hub bridges the gap between sustainable energy management and smart education — equipping African students, researchers, and innovators to lead tomorrow's green economy.
+      </p>
+      <div class="hero-actions">
+        <a href="#focus" class="btn btn-primary">Explore Our Work ↓</a>
+        <a href="#contact" class="btn btn-outline">Join the Community</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat-item">
+          <div class="hero-stat-num">2<span>+</span></div>
+          <div class="hero-stat-label">Core Focus Areas</div>
+        </div>
+        <div class="hero-stat-item">
+          <div class="hero-stat-num">3<span>+</span></div>
+          <div class="hero-stat-label">Future Divisions</div>
+        </div>
+        <div class="hero-stat-item">
+          <div class="hero-stat-num">1<span>🌍</span></div>
+          <div class="hero-stat-label">Africa-Centered Mission</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#f5faf7"/>
+  </svg>
+</div>
+
+
+<!-- ══ PARTNERS ═══════════════════════════════════════════════ -->
+<div id="partners">
+  <div class="container">
+    <p class="partners-label">Future Partners &amp; Collaboration Areas</p>
+    <div class="marquee-wrap">
+      <div class="marquee-track">
+        <!-- repeated twice for seamless loop -->
+        <div class="partner-chip"><span class="partner-dot"></span>African Universities</div>
+        <div class="partner-chip"><span class="partner-dot"></span>Solar Energy NGOs</div>
+        <div class="partner-chip"><span class="partner-dot"></span>STEM Institutions</div>
+        <div class="partner-chip"><span class="partner-dot"></span>Energy Consultancies</div>
+        <div class="partner-chip"><span class="partner-dot"></span>Research Hubs</div>
+        <div class="partner-chip"><span class="partner-dot"></span>EdTech Platforms</div>
+        <div class="partner-chip"><span class="partner-dot"></span>Renewable Startups</div>
+        <div class="partner-chip"><span class="partner-dot"></span>Youth Innovators</div>
+        <div class="partner-chip"><span class="partner-dot"></span>African Universities</div>
+        <div class="partner-chip"><span class="partner-dot"></span>Solar Energy NGOs</div>
+        <div class="partner-chip"><span class="partner-dot"></span>STEM Institutions</div>
+        <div class="partner-chip"><span class="partner-dot"></span>Energy Consultancies</div>
+        <div class="partner-chip"><span class="partner-dot"></span>Research Hubs</div>
+        <div class="partner-chip"><span class="partner-dot"></span>EdTech Platforms</div>
+        <div class="partner-chip"><span class="partner-dot"></span>Renewable Startups</div>
+        <div class="partner-chip"><span class="partner-dot"></span>Youth Innovators</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ ABOUT ══════════════════════════════════════════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-card-main">
+          <h3>Why EnerWise Hub?</h3>
+          <p>Africa faces two urgent, interconnected challenges: an energy access gap and an education quality gap. EnerWise Hub exists at exactly that intersection — building the knowledge base and the sustainable solutions that Africa's future demands.</p>
+          <br/>
+          <p>We don't just talk about sustainability. We educate, mentor, consult, and innovate — making green energy accessible and education smarter.</p>
+        </div>
+        <div class="about-card-float">
+          <div class="about-float-icon">⚡</div>
+          <div>
+            <div class="about-float-label">Primary Focus</div>
+            <div class="about-float-value">Energy + Education</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-content reveal reveal-delay-2">
+        <div class="section-label">Who We Are</div>
+        <h2 class="section-title">An Innovation-Driven <span>Platform</span></h2>
+        <p class="about-text">
+          EnerWise Hub is a future-focused initiative combining sustainable energy management and smart educational development. We empower African students, researchers, and innovators through knowledge, mentorship, and real-world solutions.
+        </p>
+        <div class="about-pillars">
+          <div class="pillar-row">
+            <div class="pillar-icon">🌱</div>
+            <div>
+              <h4>Sustainable Energy First</h4>
+              <p>Renewable energy, solar/wind technology, energy efficiency, and smart grid solutions are our core mission.</p>
+            </div>
+          </div>
+          <div class="pillar-row">
+            <div class="pillar-icon">📚</div>
+            <div>
+              <h4>Education as Impact Tool</h4>
+              <p>Smart education systems, academic mentorship, and scholarship guidance support the energy mission.</p>
+            </div>
+          </div>
+          <div class="pillar-row">
+            <div class="pillar-icon">🤖</div>
+            <div>
+              <h4>AI as Our Edge</h4>
+              <p>AI-powered tools for learning, energy analytics, and innovation form our technological advantage.</p>
+            </div>
+          </div>
+        </div>
+        <a href="#focus" class="btn btn-green">Explore Focus Areas →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ FOCUS AREAS ════════════════════════════════════════════ -->
+<section id="focus">
+  <div class="container">
+    <div class="text-center reveal">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Two Pillars, <span>One Vision</span></h2>
+      <p class="section-desc">Everything EnerWise Hub does is rooted in two interconnected commitments — sustainable energy and smart education.</p>
+    </div>
+
+    <div class="focus-cards">
+      <!-- Energy -->
+      <div class="focus-card focus-card-energy reveal reveal-delay-1">
+        <div class="focus-card-badge">⭐ Primary Focus</div>
+        <div class="focus-bg-deco">⚡</div>
+        <div class="focus-card-icon">☀️</div>
+        <h3>Sustainable Energy Management</h3>
+        <p>We champion Africa's transition to clean, reliable, and affordable energy. From solar and wind to energy efficiency strategies and smart grid awareness — this is our core identity.</p>
+        <div class="focus-tags">
+          <span class="focus-tag">Solar Technology</span>
+          <span class="focus-tag">Wind Energy</span>
+          <span class="focus-tag">Energy Efficiency</span>
+          <span class="focus-tag">Smart Grids</span>
+          <span class="focus-tag">Green Innovation</span>
+          <span class="focus-tag">Sustainability</span>
+        </div>
+        <a href="#services" class="btn btn-primary">Explore Energy →</a>
+      </div>
+
+      <!-- Education -->
+      <div class="focus-card focus-card-education reveal reveal-delay-2">
+        <div class="focus-card-badge">📘 Supporting Pillar</div>
+        <div class="focus-bg-deco">🎓</div>
+        <div class="focus-card-icon">🎓</div>
+        <h3>Smart Education &amp; Student Development</h3>
+        <p>Education is how we scale our impact. We build smart learning systems, guide students toward scholarships, and mentor the next generation of African innovators and researchers.</p>
+        <div class="focus-tags">
+          <span class="focus-tag">Smart Learning</span>
+          <span class="focus-tag">Mentorship</span>
+          <span class="focus-tag">Scholarship Guidance</span>
+          <span class="focus-tag">STEM</span>
+          <span class="focus-tag">Research Skills</span>
+          <span class="focus-tag">AI Literacy</span>
+        </div>
+        <a href="#services" class="btn btn-outline">Explore Education →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ SERVICES ═══════════════════════════════════════════════ -->
+<section id="services">
+  <div class="container">
+    <div class="services-header">
+      <div class="reveal">
+        <div class="section-label">What We Offer</div>
+        <h2 class="section-title">Our <span>Services</span></h2>
+      </div>
+      <div class="services-tabs reveal reveal-delay-2">
+        <button class="tab-btn active" onclick="filterServices('all', this)">All</button>
+        <button class="tab-btn" onclick="filterServices('energy', this)">Energy</button>
+        <button class="tab-btn" onclick="filterServices('education', this)">Education</button>
+      </div>
+    </div>
+
+    <div class="service-grid" id="serviceGrid">
+      <!-- Energy services -->
+      <div class="service-card reveal" data-cat="energy">
+        <div class="service-icon">🔋</div>
+        <h4>Energy Efficiency Consulting</h4>
+        <p>Practical guidance for schools, homes, and businesses to reduce energy waste and optimise consumption.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-1" data-cat="energy">
+        <div class="service-icon">☀️</div>
+        <h4>Solar Energy Awareness</h4>
+        <p>Educational campaigns and technical resources on solar installation, maintenance, and benefits across Africa.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-2" data-cat="energy">
+        <div class="service-icon">💨</div>
+        <h4>Renewable Energy Education</h4>
+        <p>Workshops, guides, and learning materials covering wind, hydro, and solar energy systems and careers.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-3" data-cat="energy">
+        <div class="service-icon">🌐</div>
+        <h4>Smart Energy Analytics</h4>
+        <p>AI-powered tools to analyse energy usage patterns and recommend smarter, greener alternatives.</p>
+      </div>
+      <!-- Education services -->
+      <div class="service-card reveal reveal-delay-1" data-cat="education">
+        <div class="service-icon">🎯</div>
+        <h4>Academic Mentorship</h4>
+        <p>One-on-one and group mentorship programs connecting students with experts in STEM and energy fields.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-2" data-cat="education">
+        <div class="service-icon">🏅</div>
+        <h4>Scholarship Guidance</h4>
+        <p>Step-by-step support for African students navigating local and international scholarship applications.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ IMPACT NUMBERS ══════════════════════════════════════════ -->
+<section id="impact">
+  <div class="container">
+    <div class="impact-inner">
+      <div class="impact-item reveal">
+        <div class="impact-num">2<span class="suffix">+</span></div>
+        <div class="impact-label">Core Service Areas<br/>Live &amp; Growing</div>
+      </div>
+      <div class="impact-divider"></div>
+      <div class="impact-item reveal reveal-delay-1">
+        <div class="impact-num">3<span class="suffix">+</span></div>
+        <div class="impact-label">Future Divisions<br/>Planned</div>
+      </div>
+      <div class="impact-divider"></div>
+      <div class="impact-item reveal reveal-delay-2">
+        <div class="impact-num">50<span class="suffix">K+</span></div>
+        <div class="impact-label">Potential Students<br/>to Reach</div>
+      </div>
+      <div class="impact-divider"></div>
+      <div class="impact-item reveal reveal-delay-3">
+        <div class="impact-num">54<span class="suffix">🌍</span></div>
+        <div class="impact-label">African Countries<br/>in Our Scope</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ VISION ═════════════════════════════════════════════════ -->
+<section id="vision">
+  <div class="container">
+    <div class="text-center reveal">
+      <div class="section-label">The Roadmap</div>
+      <h2 class="section-title">Where EnerWise Hub <span>Is Going</span></h2>
+      <p class="section-desc">We are building something that goes far beyond a website. Here is the long-term plan.</p>
+    </div>
+
+    <div class="vision-grid">
+      <div class="vision-steps">
+        <div class="vision-step reveal">
+          <div class="vision-step-num">01</div>
+          <div class="vision-step-body">
+            <h4>Sustainability Awareness Platform</h4>
+            <p>A trusted hub for Africa-focused content on energy access, climate solutions, and green technology news.</p>
+          </div>
+        </div>
+        <div class="vision-step reveal reveal-delay-1">
+          <div class="vision-step-num">02</div>
+          <div class="vision-step-body">
+            <h4>Energy Consultancy</h4>
+            <p>Helping schools, communities, and businesses understand, audit, and improve their energy systems.</p>
+          </div>
+        </div>
+        <div class="vision-step reveal reveal-delay-2">
+          <div class="vision-step-num">03</div>
+          <div class="vision-step-body">
+            <h4>Student Mentorship Network</h4>
+            <p>A structured network connecting African STEM students with mentors, scholarships, and real-world projects.</p>
+          </div>
+        </div>
+        <div class="vision-step reveal reveal-delay-3">
+          <div class="vision-step-num">04</div>
+          <div class="vision-step-body">
+            <h4>Renewable Energy Learning Platform</h4>
+            <p>Full courses and certifications in solar, wind, energy management, and AI for sustainability.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="vision-graphic reveal reveal-delay-2">
+        <div class="vision-quote-mark">"</div>
+        <p class="vision-quote-text">Empowering Sustainable Energy and Smart Education — one student, one community, one innovation at a time.</p>
+        <p class="vision-quote-sub">— EnerWise Hub Official Tagline</p>
+        <div class="vision-tags">
+          <span class="vtag active">EdTech</span>
+          <span class="vtag active">Clean Energy</span>
+          <span class="vtag">AI Innovation</span>
+          <span class="vtag">Africa Rising</span>
+          <span class="vtag">STEM</span>
+          <span class="vtag">Sustainability</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ CTA BANNER ═════════════════════════════════════════════ -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <div>
+        <h2>Ready to Join the Movement?</h2>
+        <p>Whether you're a student, researcher, educator, or energy enthusiast — there's a place for you at EnerWise Hub.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="#contact" class="btn btn-green">Get Involved</a>
+        <a href="#about" class="btn btn-ghost">Learn More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ CONTACT ════════════════════════════════════════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="text-center reveal">
+      <div class="section-label">Reach Out</div>
+      <h2 class="section-title">Get In <span>Touch</span></h2>
+      <p class="section-desc">Have a question, partnership idea, or just want to connect? We'd love to hear from you.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="contact-item">
+          <div class="contact-item-icon">📧</div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-value">hello@enerwisehub.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🌍</div>
+          <div>
+            <div class="contact-item-label">Region</div>
+            <div class="contact-item-value">Africa-Wide (Remote-First)</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">💼</div>
+          <div>
+            <div class="contact-item-label">Partnerships</div>
+            <div class="contact-item-value">partnerships@enerwisehub.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🎓</div>
+          <div>
+            <div class="contact-item-label">Students &amp; Mentorship</div>
+            <div class="contact-item-value">students@enerwisehub.com</div>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form reveal reveal-delay-2" onsubmit="handleForm(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-input" placeholder="Your first name" required/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-input" placeholder="Your last name" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-input" placeholder="you@example.com" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">I am a…</label>
+          <select class="form-select">
+            <option value="">Select your role</option>
+            <option>Student</option>
+            <option>Researcher / Academic</option>
+            <option>Energy Professional</option>
+            <option>Educator</option>
+            <option>NGO / Organisation</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Tell us how we can help or collaborate…" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-green" style="width:100%; justify-content:center;">
+          Send Message ✉️
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ FOOTER ═════════════════════════════════════════════════ -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-logo">
+          <div class="footer-logo-mark">
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 2L12 7H17L13 10L14.5 15L10 12L5.5 15L7 10L3 7H8L10 2Z" fill="#F0A500"/>
+            </svg>
+          </div>
+          <span class="footer-brand-name">EnerWise <span>Hub</span></span>
+        </div>
+        <p class="footer-desc">Empowering Africa through sustainable energy management and smart education. Building the green, intelligent future — one innovator at a time.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn" aria-label="Twitter">𝕏</a>
+          <a href="#" class="social-btn" aria-label="LinkedIn">in</a>
+          <a href="#" class="social-btn" aria-label="Instagram">📷</a>
+          <a href="#" class="social-btn" aria-label="YouTube">▶</a>
+        </div>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Platform</p>
+        <ul class="footer-links">
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#focus">Focus Areas</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#vision">Our Vision</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Energy</p>
+        <ul class="footer-links">
+          <li><a href="#">Solar Technology</a></li>
+          <li><a href="#">Wind Energy</a></li>
+          <li><a href="#">Energy Efficiency</a></li>
+          <li><a href="#">Smart Grids</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Education</p>
+        <ul class="footer-links">
+          <li><a href="#">Mentorship</a></li>
+          <li><a href="#">Scholarships</a></li>
+          <li><a href="#">STEM Learning</a></li>
+          <li><a href="#">Research Guidance</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-bottom-copy">© 2025 EnerWise Hub. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to top -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+
+<!-- ══ SCRIPTS ════════════════════════════════════════════════ -->
+<script>
+  // ── Navbar scroll ──────────────────────────────────────────
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+    document.getElementById('back-top').classList.toggle('visible', window.scrollY > 400);
+  });
+
+  // ── Mobile menu ────────────────────────────────────────────
+  const mobileMenu = document.getElementById('mobileMenu');
+  document.getElementById('menuToggle').addEventListener('click', () => {
+    mobileMenu.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+  document.getElementById('menuClose').addEventListener('click', closeMenu);
+  document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', closeMenu));
+  function closeMenu() {
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // ── Scroll reveal ──────────────────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Service tab filter ─────────────────────────────────────
+  function filterServices(cat, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.service-card').forEach(card => {
+      const show = cat === 'all' || card.dataset.cat === cat;
+      card.style.display = show ? '' : 'none';
+    });
+  }
+
+  // ── Contact form ───────────────────────────────────────────
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.textContent = '✅ Message Sent! We\'ll be in touch soon.';
+    btn.style.background = 'var(--green-bright)';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Send Message ✉️';
+      btn.style.background = '';
+      btn.disabled = false;
+      e.target.reset();
+    }, 4000);
+  }
+
+  // ── Active nav link on scroll ──────────────────────────────
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
+    });
+  });
+</script>
+
+</body>
+</html>
